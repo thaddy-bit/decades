@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# LA DECADES — Site institutionnel
 
-## Getting Started
+Site web de la direction **LA DECADES**, réseau d'écoles chrétiennes au Sénégal.
 
-First, run the development server:
+## Stack
+
+- **Next.js 16** — site public
+- **Sanity** — gestion du contenu (écoles, actualités, paramètres)
+- **Tailwind CSS** — charte visuelle (orange `#D95F23`, crème, noir)
+
+## Pages
+
+| Route | Description |
+|-------|-------------|
+| `/` | Accueil |
+| `/direction` | Présentation de la direction |
+| `/ecoles` | Liste des écoles par ville |
+| `/ecoles/[slug]` | Fiche école |
+| `/actualites` | Articles, annonces, événements, partenariats |
+| `/actualites/[slug]` | Détail d'une publication |
+| `/contact` | Contact et formulaire |
+| `/studio` | Administration Sanity |
+
+## Démarrage rapide
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Ouvrez [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Sans configuration Sanity, le site affiche des **données de démonstration**.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Configurer Sanity
 
-## Learn More
+**Guide détaillé (recommandé) :** voir [`SETUP-SANITY.md`](./SETUP-SANITY.md)
 
-To learn more about Next.js, take a look at the following resources:
+Résumé :
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+cp .env.local.example .env.local
+# Éditez .env.local avec votre Project ID depuis sanity.io/manage
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+npx sanity login --provider google   # ou github / sanity
+npm run check:sanity                 # vérifie .env.local
+npm run dev
+```
 
-## Deploy on Vercel
+Puis ouvrez `/studio` et créez :
+   - **Paramètres du site** (1 document)
+   - **Écoles**
+   - **Actualités**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Scripts
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Commande | Action |
+|----------|--------|
+| `npm run dev` | Serveur de développement |
+| `npm run build` | Build production |
+| `npm run start` | Serveur production |
+
+## Déploiement
+
+Recommandé : [Vercel](https://vercel.com) avec les variables d'environnement Sanity.
+
+## Logo
+
+Le fichier `public/logo.png` est utilisé dans l'en-tête et le pied de page.
