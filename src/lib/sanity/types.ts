@@ -21,6 +21,12 @@ export type School = {
   featured?: boolean;
 };
 
+export type PostGalleryImage = {
+  url: string;
+  caption?: string;
+  alt?: string;
+};
+
 export type Post = {
   _id: string;
   title: string;
@@ -29,6 +35,7 @@ export type Post = {
   excerpt?: string;
   body?: PortableTextBlock[];
   imageUrl?: string;
+  gallery?: PostGalleryImage[];
   videoUrl?: string;
   publishedAt: string;
   city?: string;
@@ -86,6 +93,9 @@ export type SiteSettings = {
   contactEmail?: string;
   contactPhone?: string;
   contactAddress?: string;
+  contactMapLat?: number;
+  contactMapLng?: number;
+  contactMapZoom?: number;
   contactHeroImageUrl?: string;
   contactIntro?: string;
   newsHeroImageUrl?: string;

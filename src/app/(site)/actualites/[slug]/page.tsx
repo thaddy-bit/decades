@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PortableTextContent } from "@/components/content/PortableTextContent";
+import { PostGallery } from "@/components/posts/PostGallery";
 import { PostTypeBadge } from "@/components/posts/PostTypeBadge";
 import { getPostBySlug, getPosts } from "@/lib/sanity/fetch";
 import { formatDate, getYouTubeEmbedUrl } from "@/lib/utils";
@@ -91,6 +92,10 @@ export default async function ActualiteDetailPage({ params }: Props) {
             <div className="mt-10 rounded-2xl bg-white p-8 shadow-sm ring-1 ring-stone-200/60">
               <PortableTextContent value={post.body} />
             </div>
+          )}
+
+          {post.gallery && post.gallery.length > 0 && (
+            <PostGallery images={post.gallery} eventTitle={post.title} />
           )}
 
           {embedUrl && (

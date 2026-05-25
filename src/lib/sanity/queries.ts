@@ -59,6 +59,11 @@ export const postBySlugQuery = `*[_type == "post" && slug.current == $slug][0] {
   city,
   videoUrl,
   "imageUrl": image.asset->url,
+  "gallery": gallery[]{
+    "url": image.asset->url,
+    caption,
+    alt
+  },
   "schoolNames": schools[]->name
 }`;
 
@@ -128,6 +133,9 @@ export const siteSettingsQuery = `*[_type == "siteSettings"][0] {
   contactEmail,
   contactPhone,
   contactAddress,
+  contactMapLat,
+  contactMapLng,
+  contactMapZoom,
   "contactHeroImageUrl": contactHeroImage.asset->url,
   contactIntro,
   "newsHeroImageUrl": newsHeroImage.asset->url,

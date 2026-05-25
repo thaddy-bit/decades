@@ -152,7 +152,7 @@ C’est **le même document** : utilisez les **onglets en haut du formulaire** p
 | **Nom complet officiel** | Référence ; utilisé en secours si le texte hero est vide |
 | Slogan | Pied de page |
 
-Autres onglets : **Nos Écoles**, **Actualités**, **Contact** (bannières + intros + coordonnées).
+Autres onglets : **Nos Écoles**, **Actualités**, **Contact** (bannières + intros + coordonnées + **carte** : adresse, latitude/longitude optionnelles, zoom).
 
 > **Important :** après modification, cliquez **Publish**. Le site met jusqu’à ~2 minutes à rafraîchir le cache.
 
@@ -170,7 +170,9 @@ Pour chaque établissement :
 
 - Titre, type (article, annonce, événement…)  
 - Résumé, contenu  
-- Image et/ou **lien YouTube**  
+- **Image principale** — une seule (cartes, bannière de l’article)  
+- **Galerie photos** — autres images du même événement (affichées en grille sur la page détail)  
+- Lien **YouTube** (optionnel)  
 - Date de publication  
 
 Publiez chaque document (bouton **Publish**).

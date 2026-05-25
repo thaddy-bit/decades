@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ContactLocationMap } from "@/components/contact/ContactLocationMap";
 import { ContactQuickActions } from "@/components/contact/ContactQuickActions";
 import { Button } from "@/components/ui/Button";
 import { ImagePageHero } from "@/components/ui/ImagePageHero";
@@ -267,6 +268,25 @@ export default async function ContactPage() {
                 </div>
               </form>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-stone-200 bg-gradient-to-b from-cream/50 to-white py-10 sm:py-12">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <SectionHeading
+            label="Localisation"
+            title="Où nous trouver"
+            description="Siège de la direction LA DECADES — plan pour vous rendre sur place."
+            align="center"
+          />
+          <div className="mt-8">
+            <ContactLocationMap
+              address={settings.contactAddress}
+              lat={settings.contactMapLat}
+              lng={settings.contactMapLng}
+              zoom={settings.contactMapZoom}
+            />
           </div>
         </div>
       </section>

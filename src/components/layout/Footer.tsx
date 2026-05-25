@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import { BrandLogo } from "@/components/ui/BrandLogo";
 import { getSiteSettings } from "@/lib/sanity/fetch";
 
 const navLinks = [
@@ -51,14 +51,7 @@ export async function Footer() {
           {/* Marque */}
           <div className="lg:col-span-4">
             <Link href="/" className="inline-flex items-center gap-4">
-              <Image
-                src="/logo.png"
-                alt=""
-                width={52}
-                height={68}
-                className="h-12 object-contain brightness-0 invert"
-                style={{ width: "auto", height: "auto" }}
-              />
+              <BrandLogo variant="footer" />
               <div>
                 <p className="font-serif text-xl font-semibold tracking-tight">
                   LA DECADES
@@ -173,19 +166,31 @@ export async function Footer() {
         </div>
 
         {/* Barre inférieure */}
-        <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-cream/10 pt-8 sm:flex-row">
-          <p className="text-center text-xs text-cream/50 sm:text-left">
-            © {year} LA DECADES — Tous droits réservés · République du Sénégal
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-cream/50">
-            <span className="hidden sm:inline text-cream/30">|</span>
-            <Link
-              href="/studio"
-              className="transition hover:text-cream/80"
-            >
-              Administration
-            </Link>
+        <div className="mt-14 flex flex-col items-center gap-4 border-t border-cream/10 pt-8 sm:gap-3">
+          <div className="flex w-full flex-col items-center justify-between gap-4 sm:flex-row">
+            <p className="text-center text-xs text-cream/50 sm:text-left">
+              © {year} LA DECADES — Tous droits réservés · République du Sénégal
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-cream/50">
+              <Link
+                href="/studio"
+                className="transition hover:text-cream/80"
+              >
+                Administration
+              </Link>
+            </div>
           </div>
+          <p className="w-full text-left text-xs text-cream/45">
+            Site développé par{" "}
+            <a
+              href="https://www.glynn-technologie.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-medium text-cream/70 underline decoration-cream/30 underline-offset-2 transition hover:text-decades-orange hover:decoration-decades-orange"
+            >
+              Glynn Technologie
+            </a>
+          </p>
         </div>
       </div>
     </footer>

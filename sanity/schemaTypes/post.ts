@@ -47,9 +47,54 @@ export const post = defineType({
     }),
     defineField({
       name: "image",
-      title: "Image",
+      title: "Image principale",
       type: "image",
       options: { hotspot: true },
+      description:
+        "Photo de une : cartes actualités, bannière et partage. Obligatoire pour une bonne mise en avant.",
+    }),
+    defineField({
+      name: "gallery",
+      title: "Galerie photos",
+      type: "array",
+      description:
+        "Photos supplémentaires du même événement (ordre = affichage sur la page). La image principale reste séparée.",
+      of: [
+        {
+          type: "object",
+          name: "galleryImage",
+          title: "Photo",
+          fields: [
+            defineField({
+              name: "image",
+              title: "Image",
+              type: "image",
+              options: { hotspot: true },
+              validation: (rule) => rule.required(),
+            }),
+            defineField({
+              name: "caption",
+              title: "Légende",
+              type: "string",
+            }),
+            defineField({
+              name: "alt",
+              title: "Texte alternatif",
+              type: "string",
+              description: "Pour l'accessibilité (décrivez brièvement la scène)",
+            }),
+          ],
+          preview: {
+            select: { title: "caption", media: "image" },
+            prepare({ title, media }) {
+              return {
+                title: title || "Photo",
+                media,
+              };
+            },
+          },
+        },
+      ],
     }),
     defineField({
       name: "videoUrl",

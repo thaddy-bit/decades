@@ -20,6 +20,7 @@ import {
   fallbackSchools,
   fallbackSettings,
 } from "../data/fallback";
+import { mergeSiteSettings } from "../merge-site-settings";
 
 const FETCH_TIMEOUT_MS = 8_000;
 const REVALIDATE_SECONDS = 120;
@@ -142,7 +143,7 @@ export const getSiteSettings = cache(async (): Promise<SiteSettings> => {
     {},
     null,
   );
-  return settings ?? fallbackSettings;
+  return mergeSiteSettings(settings);
 });
 
 export const getHeroSlidesForHome = cache(async (): Promise<HeroSlide[]> => {

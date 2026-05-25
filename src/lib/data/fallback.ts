@@ -10,6 +10,9 @@ export const fallbackSettings: SiteSettings = {
   contactEmail: "contact@ladecades.sn",
   contactPhone: "+221 33 000 00 00",
   contactAddress: "Dakar, Sénégal",
+  contactMapLat: 14.7167,
+  contactMapLng: -17.4677,
+  contactMapZoom: 13,
   contactIntro:
     "Pour les inscriptions, les partenariats ou toute question sur le réseau LA DECADES, notre équipe est à votre écoute. Choisissez le canal qui vous convient le mieux.",
   newsIntro:

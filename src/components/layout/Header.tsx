@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
+import { BrandLogo } from "@/components/ui/BrandLogo";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 
@@ -92,13 +92,8 @@ export function Header() {
       >
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
           <Link href="/" className="flex shrink-0 items-center gap-3" onClick={closeSidebar}>
-            <Image
-              src="/logo.png"
-              alt="LA DECADES"
-              width={48}
-              height={64}
-              className="h-11 object-contain sm:h-12"
-              style={{ width: "auto", height: "auto" }}
+            <BrandLogo
+              variant={overlay ? "navbar-overlay" : "navbar"}
               priority
             />
             <div className="hidden sm:block">
@@ -190,14 +185,7 @@ export function Header() {
           >
             <div className="flex items-center justify-between border-b border-stone-100 px-5 py-4">
               <Link href="/" className="flex items-center gap-3" onClick={closeSidebar}>
-                <Image
-                  src="/logo.png"
-                  alt="LA DECADES"
-                  width={40}
-                  height={52}
-                  className="h-10 object-contain"
-                  style={{ width: "auto", height: "auto" }}
-                />
+                <BrandLogo variant="sidebar" />
                 <div>
                   <p className="font-serif text-base font-semibold text-ink">LA DECADES</p>
                   <p className="text-xs text-stone">Menu</p>
