@@ -5,16 +5,25 @@ type MapLocation = {
   zoom?: number;
 };
 
-export function hasMapCoordinates(
+export type MapCoordinates = { lat: number; lng: number };
+
+export function resolveMapCoordinates(
   lat?: number,
   lng?: number,
-): lat is number {
-  return (
+): MapCoordinates | null {
+  if (
     typeof lat === "number" &&
     typeof lng === "number" &&
     !Number.isNaN(lat) &&
     !Number.isNaN(lng)
-  );
+  ) {
+    return { lat, lng };
+  }
+  return null;
+}
+
+export function hasMapCoordinates(lat?: number, lng?: number): boolean {
+  return resolveMapCoordinates(lat, lng) !== null;
 }
 
 /** Carte intégrée OpenStreetMap (fiable sans clé API). */

@@ -3,7 +3,7 @@ import {
   getGoogleMapsOpenUrl,
   getOsmEmbedUrl,
   getOsmViewUrl,
-  hasMapCoordinates,
+  resolveMapCoordinates,
 } from "@/lib/map-urls";
 
 type ContactLocationMapProps = {
@@ -19,18 +19,13 @@ export async function ContactLocationMap({
   lng,
   zoom = 15,
 }: ContactLocationMapProps) {
-  let mapLat = lat;
-  let mapLng = lng;
+  let coords = resolveMapCoordinates(lat, lng);
 
-  if (!hasMapCoordinates(mapLat, mapLng) && address?.trim()) {
-    const geo = await geocodeAddress(address);
-    if (geo) {
-      mapLat = geo.lat;
-      mapLng = geo.lng;
-    }
+  if (!coords && address?.trim()) {
+    coords = await geocodeAddress(address);
   }
 
-  if (!hasMapCoordinates(mapLat, mapLng)) {
+  if (!coords) {
     return (
       <p className="rounded-2xl border border-dashed border-stone-200 bg-cream/40 px-6 py-10 text-center text-sm text-stone">
         Carte indisponible : renseignez l&apos;adresse ou les coordonnées GPS dans
@@ -39,6 +34,7 @@ export async function ContactLocationMap({
     );
   }
 
+  const { lat: mapLat, lng: mapLng } = coords;
   const embedUrl = getOsmEmbedUrl(mapLat, mapLng, zoom);
   const googleUrl = getGoogleMapsOpenUrl({ address, lat: mapLat, lng: mapLng });
   const osmUrl = getOsmViewUrl(mapLat, mapLng, zoom);
