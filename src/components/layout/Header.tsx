@@ -1,17 +1,15 @@
 "use client";
 
 import Link from "next/link";
+import {
+  mobileNavLinkDefs,
+  MobileSidebar,
+} from "@/components/layout/MobileSidebar";
 import { BrandLogo } from "@/components/ui/BrandLogo";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 
-const navLinks = [
-  { href: "/", label: "Accueil" },
-  { href: "/direction", label: "La Direction" },
-  { href: "/ecoles", label: "Nos Écoles" },
-  { href: "/actualites", label: "Actualités" },
-  { href: "/contact", label: "Contact" },
-];
+const navLinks = mobileNavLinkDefs.map(({ href, label }) => ({ href, label }));
 
 const SIDEBAR_TRANSITION_MS = 320;
 
@@ -166,81 +164,12 @@ export function Header() {
         </div>
       </header>
 
-      {sidebarMounted && (
-        <div className="fixed inset-0 z-[70] md:hidden" role="presentation">
-          <button
-            type="button"
-            className="sidebar-backdrop absolute inset-0 bg-ink/50 backdrop-blur-[2px]"
-            data-open={sidebarOpen}
-            aria-label="Fermer le menu"
-            onClick={closeSidebar}
-          />
-
-          <aside
-            id="mobile-sidebar"
-            className="sidebar-panel absolute right-0 top-0 flex h-full w-[min(88vw,320px)] flex-col bg-white shadow-2xl"
-            data-open={sidebarOpen}
-            aria-label="Navigation mobile"
-            aria-hidden={!sidebarOpen}
-          >
-            <div className="flex items-center justify-between border-b border-stone-100 px-5 py-4">
-              <Link href="/" className="flex items-center gap-3" onClick={closeSidebar}>
-                <BrandLogo variant="sidebar" />
-                <div>
-                  <p className="font-serif text-base font-semibold text-ink">LA DECADES</p>
-                  <p className="text-xs text-stone">Menu</p>
-                </div>
-              </Link>
-              <button
-                type="button"
-                onClick={closeSidebar}
-                className="rounded-lg p-2 text-stone transition hover:bg-cream hover:text-ink"
-                aria-label="Fermer"
-              >
-                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              </button>
-            </div>
-
-            <nav className="flex-1 overflow-y-auto px-4 py-6">
-              <ul className="space-y-1">
-                {navLinks.map((link) => {
-                  const active =
-                    link.href === "/"
-                      ? pathname === "/"
-                      : pathname.startsWith(link.href);
-                  return (
-                    <li key={link.href}>
-                      <Link
-                        href={link.href}
-                        onClick={closeSidebar}
-                        className={`flex items-center rounded-xl px-4 py-3.5 text-base font-medium transition-colors ${
-                          active
-                            ? "bg-decades-orange text-white"
-                            : "text-ink hover:bg-cream hover:text-decades-orange"
-                        }`}
-                      >
-                        {link.label}
-                      </Link>
-                    </li>
-                  );
-                })}
-              </ul>
-            </nav>
-
-            <div className="border-t border-stone-100 p-5">
-              <Link
-                href="/contact"
-                onClick={closeSidebar}
-                className="flex w-full items-center justify-center rounded-full bg-decades-orange px-6 py-3 text-sm font-semibold text-white transition hover:bg-decades-orange-dark"
-              >
-                Nous contacter
-              </Link>
-            </div>
-          </aside>
-        </div>
-      )}
+      <MobileSidebar
+        mounted={sidebarMounted}
+        open={sidebarOpen}
+        pathname={pathname}
+        onClose={closeSidebar}
+      />
     </>
   );
 }
